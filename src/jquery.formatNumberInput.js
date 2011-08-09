@@ -1,7 +1,21 @@
 (function($) {
+	var validKeys = [48,49,50,51,52,53,54,55,56,57]
+	var negativeKey = 45;
+	var methods = {
+		validKeypress: function(keyCode, currentValue) {
+			if (keyCode == negativeKey) {
+				return currentValue == '';
+			} else {
+				return (validKeys.indexOf(keyCode) >= 0);
+			}
+		}
+	};	
+
+
 	$.fn.formatNumberInput = function(options) {
-	
 	}
+
+	$.fn.formatNumberInputMethods = methods;
 })(jQuery);
 
 /*
