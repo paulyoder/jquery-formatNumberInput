@@ -1,4 +1,4 @@
-describe('jquery.formatNumber', function() {
+describe('jquery.formatNumberInput', function() {
 	var $textBox;
 
 	beforeEach(function() {
@@ -13,8 +13,8 @@ describe('jquery.formatNumber', function() {
 		$textBox = $('#textbox');
 	});
 
-	it('should pass', function() {
-		expect($textBox).toExist();
+	it('should exist', function() {
+		expect(jQuery().formatNumberInput).toBeTruthy();
 	});
 
 });
