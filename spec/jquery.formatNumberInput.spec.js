@@ -1,11 +1,18 @@
 function validKeyCode(value) {
-	var keyCode = value.charCodeAt(0);
-	return $.fn.formatNumberInput({'returnMethods':true})['validKeyCode'](keyCode, '');
+	return validKeyCode(value, '');
 }
+
 function validKeyCode(value, currentValue) {
-	var keyCode = value.charCodeAt(0);
-	return $.fn.formatNumberInput({'returnMethods':true})['validKeyCode'](keyCode, currentValue);
+	return validKeyCode(value, currentValue, {});
 }
+
+function validKeyCode(value, currentValue, options) {
+	var keyCode = value.charCodeAt(0);
+	var defaultOptions = { 'returnMethods': true };
+	$.extend(defaultOptions, options);
+	return $.fn.formatNumberInput(defaultOptions)['validKeyCode'](keyCode, currentValue);
+}
+
 function validControlKeyCode(keyCode) {
 	return $.fn.formatNumberInput({'returnMethods':true})['validKeyCode'](keyCode, '');
 }
@@ -83,6 +90,9 @@ describe('jquery.formatNumberInput', function() {
 	describe('options', function() {
 		it('allowNegative is defaulted to true', function() {
 			expect(validKeyCode('-', '')).toBeTruthy();
+		});
+		it('when allowNegative is false then negatives are not allowed', function() {
+			expect(validKeyCode('-', '', {'allowNegative': false})).toBeFalsy();
 		});
 	});
 });

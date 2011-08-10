@@ -1,10 +1,11 @@
 (function($) {
 	var validKeys = [8,48,49,50,51,52,53,54,55,56,57]
 	var negativeKey = 45;
+	var allowNegative = true;
 
 	var methods = {
 		validKeyCode: function(keyCode, currentValue) {
-			if (keyCode == negativeKey) { return currentValue == ''; }
+			if (keyCode == negativeKey && allowNegative) { return currentValue == ''; }
 			else { return (validKeys.indexOf(keyCode) >= 0); }
 		},
 		formatWithCommas: function(number) {
@@ -16,6 +17,8 @@
 	$.fn.formatNumberInput = function(options) {
 		var settings = { 'allowNegative': true };
 		$.extend(settings, options);
+
+		allowNegative = settings['allowNegative'];
 		if (settings['returnMethods'] == true) { return methods; }
 	}
 })(jQuery);
