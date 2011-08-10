@@ -9,7 +9,7 @@
 			else { return (validKeys.indexOf(keyCode) >= 0); }
 		},
 		formatWithCommas: function(number) {
-			return number.replace(',', '')
+			return number.replace(/,/g, '')
 									 .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 		}
 	};	
@@ -18,8 +18,18 @@
 		var settings = { 'allowNegative': true };
 		$.extend(settings, options);
 		allowNegative = settings['allowNegative'];
-
 		if (settings['returnMethods'] == true) { return methods; }
+		
+		return this.keypress(function(e) {
+			var currentValue = $(this).val();
+			if (!methods['validKeyCode'](e.which, currentValue)) {
+				e.preventDefault();
+			}
+		}).keyup(function() {
+			var origNumber = $(this).val();
+			var newNumber = methods['formatWithCommas'](origNumber);
+			if (newNumber != origNumber) { $(this).val(newNumber); }
+		});
 	}
 })(jQuery);
 

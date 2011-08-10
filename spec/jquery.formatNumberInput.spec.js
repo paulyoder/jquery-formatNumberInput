@@ -78,6 +78,9 @@ describe('jquery.formatNumberInput', function() {
 			it('when 7 digits, it adds 2 commas', function() {
 				expect(formatWithCommas('1234567')).toEqual('1,234,567');
 			});
+			it('when 8 digits with commas in wrong place, it correctly moves commas', function() {
+				expect(formatWithCommas('1,234,5678')).toEqual('12,345,678');
+			});
 			it('when negative 3 digit number, it returns original value', function() {
 				expect(formatWithCommas('-123')).toEqual('-123');
 			});
