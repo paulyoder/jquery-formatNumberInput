@@ -1,7 +1,7 @@
 (function($) {
 	var validKeys = [48,49,50,51,52,53,54,55,56,57]
 	var negativeKey = 45;
-	var allowNegative = true;
+	var allowNegative;
 
 	var methods = {
 		validKeyCode: function(keyCode, currentValue) {
@@ -21,6 +21,8 @@
 		if (settings['returnMethods'] == true) { return methods; }
 		
 		return this.keypress(function(e) {
+			//have to reset allowNegative variable since it went out of scope
+			allowNegative = settings['allowNegative'];
 			var currentValue = $(this).val();
 			if (!methods['validKeyCode'](e.which, currentValue)) {
 				e.preventDefault();
