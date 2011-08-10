@@ -18,43 +18,49 @@ describe('jquery.formatNumberInput', function() {
 	});
 
 	describe('methods', function() {
-		describe('validKeypress', function() {
-			function validKeypress(value) {
+		describe('validKeyCode', function() {
+			function validKeyCode(value) {
 				var keyCode = value.charCodeAt(0);
-				return $.fn.formatNumberInputMethods['validKeypress'](keyCode, '');
+				return $.fn.formatNumberInput('returnMethods')['validKeyCode'](keyCode, '');
 			}
-			function validKeypress(value, currentValue) {
+			function validKeyCode(value, currentValue) {
 				var keyCode = value.charCodeAt(0);
-				return $.fn.formatNumberInputMethods['validKeypress'](keyCode, currentValue);
+				return $.fn.formatNumberInput('returnMethods')['validKeyCode'](keyCode, currentValue);
+			}
+			function validControlKeyCode(keyCode) {
+				return $.fn.formatNumberInput('returnMethods')['validKeyCode'](keyCode, '');
 			}
 			describe('entering invalid characters', function() {
-				describe('alphabet', function() {
-					it('"k"', function() {
-						expect(validKeypress('k')).toBeFalsy();
-					});
-					it('"z"', function() {
-						expect(validKeypress('z')).toBeFalsy();
-					});
-					it('- with non blank currentValue', function() {
-						expect(validKeypress('-', '12')).toBeFalsy();
-					});
+				it('k', function() {
+					expect(validKeyCode('k')).toBeFalsy();
+				});
+				it('z', function() {
+					expect(validKeyCode('z')).toBeFalsy();
+				});
+				it('- with non blank currentValue', function() {
+					expect(validKeyCode('-', '12')).toBeFalsy();
 				});
 			});
 			describe('entering valid characters', function() {
 				it('numbers', function() {
-					expect(validKeypress('0')).toBeTruthy('0');
-					expect(validKeypress('1')).toBeTruthy('1');
-					expect(validKeypress('2')).toBeTruthy('2');
-					expect(validKeypress('3')).toBeTruthy('3');
-					expect(validKeypress('4')).toBeTruthy('4');
-					expect(validKeypress('5')).toBeTruthy('5');
-					expect(validKeypress('6')).toBeTruthy('6');
-					expect(validKeypress('7')).toBeTruthy('7');
-					expect(validKeypress('8')).toBeTruthy('8');
-					expect(validKeypress('9')).toBeTruthy('9');
+					expect(validKeyCode('0')).toBeTruthy('0');
+					expect(validKeyCode('1')).toBeTruthy('1');
+					expect(validKeyCode('2')).toBeTruthy('2');
+					expect(validKeyCode('3')).toBeTruthy('3');
+					expect(validKeyCode('4')).toBeTruthy('4');
+					expect(validKeyCode('5')).toBeTruthy('5');
+					expect(validKeyCode('6')).toBeTruthy('6');
+					expect(validKeyCode('7')).toBeTruthy('7');
+					expect(validKeyCode('8')).toBeTruthy('8');
+					expect(validKeyCode('9')).toBeTruthy('9');
 				});
 				it('- with blank currentValue', function() {
-					expect(validKeypress('-', '')).toBeTruthy();
+					expect(validKeyCode('-', '')).toBeTruthy();
+				});
+				it('control characters', function() {
+					expect(validControlKeyCode(8)).toBeTruthy('Backspace');
+					expect(validControlKeyCode(9)).toBeTruthy('end');
+					expect(validControlKeyCode(46)).toBeTruthy('begin');
 				});
 			});
 		});

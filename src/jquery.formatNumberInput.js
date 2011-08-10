@@ -1,8 +1,8 @@
 (function($) {
-	var validKeys = [48,49,50,51,52,53,54,55,56,57]
+	var validKeys = [8,48,49,50,51,52,53,54,55,56,57]
 	var negativeKey = 45;
 	var methods = {
-		validKeypress: function(keyCode, currentValue) {
+		validKeyCode: function(keyCode, currentValue) {
 			if (keyCode == negativeKey) {
 				return currentValue == '';
 			} else {
@@ -13,9 +13,10 @@
 
 
 	$.fn.formatNumberInput = function(options) {
+		if (options == 'returnMethods') {
+			return methods;
+		}
 	}
-
-	$.fn.formatNumberInputMethods = methods;
 })(jQuery);
 
 /*
