@@ -11,7 +11,7 @@
 			return (validKeys.indexOf(keyCode) >= 0);
 		},
 		formatWithCommas: function(number) {
-			return number.replace(/,/g, '')
+			return number.replace(/[^-0-9]/g, '')
 									 .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 		}
 	};	

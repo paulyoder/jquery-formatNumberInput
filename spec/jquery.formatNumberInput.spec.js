@@ -85,6 +85,9 @@ describe('jquery.formatNumberInput', function() {
 			it('when negative 7 digit number, it adds 2 commans', function() {
 				expect(formatWithCommas('-1234567')).toEqual('-1,234,567');
 			});
+			it('when letters in value, it removes the letters', function() {
+				expect(formatWithCommas('2ko392')).toEqual('2,392');
+			});
 		});
 	});
 
