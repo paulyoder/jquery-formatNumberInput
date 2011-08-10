@@ -13,19 +13,50 @@
 
 	<script type="text/javascript" src="src/jquery.formatNumberInput.js"></script>
   <script type="text/javascript" src="spec/jquery.formatNumberInput.spec.js"></script>
-</head>
-<body>
-
 	<script type="text/javascript">
 		jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
 		jasmine.getEnv().execute();
 	</script>
 
-	<h2 style="margin-bottom: 0px;">Sample</h2>
-	<input id="sample" type="text" style="width: 150px;" />
+	<style>
+		h2 {
+			margin-bottom: 0px;
+		}
+
+		#sample {
+			width: 150px;
+		}
+
+		.key {
+			border: 1px solid black;
+		}
+	</style>
+
 	<script type="text/javascript">
-		$(function() { $('#sample').formatNumberInput(); });
+		$(function() { 
+			$('#sample').formatNumberInput();
+			$('#sample').keypress(function(e) {
+				$('#keypress-which').html(e.which);
+			});
+			$('#sample').keydown(function(e) {
+				$('#keydown-which').html(e.which);
+			});
+		});
 	</script>
+</head>
+<body>
+
+	<h2>Sample</h2>
+	<input id="sample" type="text" />
+
+	<div>
+		<span>Keypress:</span>
+		<span id="keypress-which" />
+	</div>
+	<div>
+		<span>Keydown:</span>
+		<span id="keydown-which" />
+	</div>
 
 </body>
 </html>
