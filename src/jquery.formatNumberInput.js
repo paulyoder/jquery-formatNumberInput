@@ -1,5 +1,5 @@
 (function($) {
-	var validKeys = [8,48,49,50,51,52,53,54,55,56,57]
+	var validKeys = [48,49,50,51,52,53,54,55,56,57]
 	var negativeKey = 45;
 	var allowNegative = true;
 
@@ -17,8 +17,8 @@
 	$.fn.formatNumberInput = function(options) {
 		var settings = { 'allowNegative': true };
 		$.extend(settings, options);
-
 		allowNegative = settings['allowNegative'];
+
 		if (settings['returnMethods'] == true) { return methods; }
 	}
 })(jQuery);

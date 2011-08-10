@@ -31,7 +31,7 @@ describe('jquery.formatNumberInput', function() {
 				it('z', function() {
 					expect(validKeyCode('z')).toBeFalsy();
 				});
-				it('- with non blank currentValue', function() {
+				it('"-" with non blank currentValue', function() {
 					expect(validKeyCode('-', '12')).toBeFalsy();
 				});
 			});
@@ -48,7 +48,7 @@ describe('jquery.formatNumberInput', function() {
 					expect(validKeyCode('8')).toBeTruthy('8');
 					expect(validKeyCode('9')).toBeTruthy('9');
 				});
-				it('- with blank currentValue', function() {
+				it('"-" with blank currentValue', function() {
 					expect(validKeyCode('-', '')).toBeTruthy();
 				});
 				/*
