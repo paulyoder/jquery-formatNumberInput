@@ -1,16 +1,17 @@
 (function($) {
 	var validKeys = [8,48,49,50,51,52,53,54,55,56,57]
 	var negativeKey = 45;
+
 	var methods = {
 		validKeyCode: function(keyCode, currentValue) {
-			if (keyCode == negativeKey) {
-				return currentValue == '';
-			} else {
-				return (validKeys.indexOf(keyCode) >= 0);
-			}
+			if (keyCode == negativeKey) { return currentValue == ''; }
+			else { return (validKeys.indexOf(keyCode) >= 0); }
+		},
+		formatWithCommas: function(number) {
+			return number.replace(',', '')
+									 .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 		}
 	};	
-
 
 	$.fn.formatNumberInput = function(options) {
 		if (options == 'returnMethods') {

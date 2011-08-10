@@ -1,23 +1,9 @@
 describe('jquery.formatNumberInput', function() {
-	var $textBox;
-
-	beforeEach(function() {
-		$textBox = $('#textbox');
-		$textBox.val('');
-
-		this.addMatchers({
-			toContainText: function(expected) {
-				return this.actual.indexOf(expected) >= 0;
-			}
-		});
-
-	});
-
 	it('formatNumberInput plugin should exist', function() {
 		expect(jQuery().formatNumberInput).toBeTruthy();
 	});
 
-	describe('methods', function() {
+	describe('internal methods', function() {
 		describe('validKeyCode', function() {
 			function validKeyCode(value) {
 				var keyCode = value.charCodeAt(0);
@@ -57,11 +43,38 @@ describe('jquery.formatNumberInput', function() {
 				it('- with blank currentValue', function() {
 					expect(validKeyCode('-', '')).toBeTruthy();
 				});
+				/*
 				it('control characters', function() {
 					expect(validControlKeyCode(8)).toBeTruthy('Backspace');
 					expect(validControlKeyCode(9)).toBeTruthy('end');
 					expect(validControlKeyCode(46)).toBeTruthy('begin');
 				});
+				*/
+			});
+		});
+		
+		describe('formatWithCommas', function() {
+			function formatWithCommas(number) {
+				return $.fn.formatNumberInput('returnMethods')['formatWithCommas'](number);
+			}
+
+			it('when less than 3 digits, it returns original value', function() {
+				expect(formatWithCommas('123')).toEqual('123');
+			});
+			it('when 4 digits, it adds a comma', function() {
+				expect(formatWithCommas('1234')).toEqual('1,234');
+			});
+			it('when 5 digits with comma in wrong place, it correctly moves comma', function() {
+				expect(formatWithCommas('1,2345')).toEqual('12,345');
+			});
+			it('when 7 digits, it adds 2 commas', function() {
+				expect(formatWithCommas('1234567')).toEqual('1,234,567');
+			});
+			it('when negative 3 digit number, it returns original value', function() {
+				expect(formatWithCommas('-123')).toEqual('-123');
+			});
+			it('when negative 7 digit number, it adds 2 commans', function() {
+				expect(formatWithCommas('-1234567')).toEqual('-1,234,567');
 			});
 		});
 	});
