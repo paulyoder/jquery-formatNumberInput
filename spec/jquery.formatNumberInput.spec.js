@@ -17,6 +17,10 @@ function validControlKeyCode(keyCode) {
 	return $.fn.formatNumberInput({'returnMethods':true})['validKeyCode'](keyCode, '');
 }
 
+function formatWithCommas(number) {
+	return $.fn.formatNumberInput({'returnMethods':true})['formatWithCommas'](number);
+}
+
 describe('jquery.formatNumberInput', function() {
 	it('formatNumberInput plugin should exist', function() {
 		expect(jQuery().formatNumberInput).toBeTruthy();
@@ -60,10 +64,6 @@ describe('jquery.formatNumberInput', function() {
 		});
 		
 		describe('formatWithCommas', function() {
-			function formatWithCommas(number) {
-				return $.fn.formatNumberInput({'returnMethods':true})['formatWithCommas'](number);
-			}
-
 			it('when less than 3 digits, it returns original value', function() {
 				expect(formatWithCommas('123')).toEqual('123');
 			});
@@ -89,11 +89,27 @@ describe('jquery.formatNumberInput', function() {
 	});
 
 	describe('options', function() {
-		it('allowNegative is defaulted to true', function() {
-			expect(validKeyCode('-', '')).toBeTruthy();
+		describe('allowNegative', function() {
+			it('allowNegative is defaulted to true', function() {
+				expect(validKeyCode('-', '')).toBeTruthy();
+			});
+			it('when allowNegative is false then negatives are not allowed', function() {
+				expect(validKeyCode('-', '', {'allowNegative': false})).toBeFalsy();
+			});
 		});
-		it('when allowNegative is false then negatives are not allowed', function() {
-			expect(validKeyCode('-', '', {'allowNegative': false})).toBeFalsy();
+		describe('maxLength', function() {
+			it('when maxLength is not pass in, it allows large numbers', function() {
+				expect(validKeyCode('8', '382,973,829,728,292,832,928')).toBeTruthy();
+			});
+			it('when maxLength = 3 and currentValue.length = 3, validKeyCode should return false', function() {
+				expect(validKeyCode('8', '333', {'maxLength': 3})).toBeFalsy();
+			});
+			it('when maxLength = 5 and currentValue = "1,234", validKeyCode should return true', function() {
+				expect(validKeyCode('8', '1,234', {'maxLength': 5})).toBeTruthy();
+			});
+			it('when maxLength = 5 and currentValue = "-1,234", validKeyCode should return true', function() {
+				expect(validKeyCode('8', '-1,234', {'maxLength': 5})).toBeTruthy();
+			});
 		});
 	});
 });
