@@ -1,3 +1,15 @@
+function validKeyCode(value) {
+	var keyCode = value.charCodeAt(0);
+	return $.fn.formatNumberInput('returnMethods')['validKeyCode'](keyCode, '');
+}
+function validKeyCode(value, currentValue) {
+	var keyCode = value.charCodeAt(0);
+	return $.fn.formatNumberInput('returnMethods')['validKeyCode'](keyCode, currentValue);
+}
+function validControlKeyCode(keyCode) {
+	return $.fn.formatNumberInput('returnMethods')['validKeyCode'](keyCode, '');
+}
+
 describe('jquery.formatNumberInput', function() {
 	it('formatNumberInput plugin should exist', function() {
 		expect(jQuery().formatNumberInput).toBeTruthy();
@@ -5,17 +17,6 @@ describe('jquery.formatNumberInput', function() {
 
 	describe('internal methods', function() {
 		describe('validKeyCode', function() {
-			function validKeyCode(value) {
-				var keyCode = value.charCodeAt(0);
-				return $.fn.formatNumberInput('returnMethods')['validKeyCode'](keyCode, '');
-			}
-			function validKeyCode(value, currentValue) {
-				var keyCode = value.charCodeAt(0);
-				return $.fn.formatNumberInput('returnMethods')['validKeyCode'](keyCode, currentValue);
-			}
-			function validControlKeyCode(keyCode) {
-				return $.fn.formatNumberInput('returnMethods')['validKeyCode'](keyCode, '');
-			}
 			describe('entering invalid characters', function() {
 				it('k', function() {
 					expect(validKeyCode('k')).toBeFalsy();
@@ -79,4 +80,9 @@ describe('jquery.formatNumberInput', function() {
 		});
 	});
 
+	describe('options', function() {
+		it('allowNegative is defaulted to true', function() {
+			expect(validKeyCode('-', '')).toBeTruthy();
+		});
+	});
 });
