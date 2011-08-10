@@ -31,6 +31,11 @@ describe('jquery.formatNumberInput', function() {
 				it('z', function() {
 					expect(validKeyCode('z')).toBeFalsy();
 				});
+				it('control characters', function() {
+					expect(validControlKeyCode(8)).toBeFalsy('Backspace');
+					expect(validControlKeyCode(9)).toBeFalsy('end');
+					expect(validControlKeyCode(46)).toBeFalsy('begin');
+				});
 				it('"-" with non blank currentValue', function() {
 					expect(validKeyCode('-', '12')).toBeFalsy();
 				});
@@ -51,13 +56,6 @@ describe('jquery.formatNumberInput', function() {
 				it('"-" with blank currentValue', function() {
 					expect(validKeyCode('-', '')).toBeTruthy();
 				});
-				/*
-				it('control characters', function() {
-					expect(validControlKeyCode(8)).toBeTruthy('Backspace');
-					expect(validControlKeyCode(9)).toBeTruthy('end');
-					expect(validControlKeyCode(46)).toBeTruthy('begin');
-				});
-				*/
 			});
 		});
 		

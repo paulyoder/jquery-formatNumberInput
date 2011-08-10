@@ -13,10 +13,6 @@
 
 	<script type="text/javascript" src="src/jquery.formatNumberInput.js"></script>
   <script type="text/javascript" src="spec/jquery.formatNumberInput.spec.js"></script>
-	<script type="text/javascript">
-		jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
-		jasmine.getEnv().execute();
-	</script>
 
 	<style>
 		h2 {
@@ -45,6 +41,10 @@
 	</script>
 </head>
 <body>
+	<script type="text/javascript">
+		jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+		jasmine.getEnv().execute();
+	</script>
 
 	<h2>Sample</h2>
 	<input id="sample" type="text" />
