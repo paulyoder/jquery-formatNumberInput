@@ -14,9 +14,9 @@
 	};	
 
 	$.fn.formatNumberInput = function(options) {
-		if (options == 'returnMethods') {
-			return methods;
-		}
+		var settings = { 'allowNegative': true };
+		$.extend(settings, options);
+		if (settings['returnMethods'] == true) { return methods; }
 	}
 })(jQuery);
 

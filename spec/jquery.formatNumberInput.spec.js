@@ -1,13 +1,13 @@
 function validKeyCode(value) {
 	var keyCode = value.charCodeAt(0);
-	return $.fn.formatNumberInput('returnMethods')['validKeyCode'](keyCode, '');
+	return $.fn.formatNumberInput({'returnMethods':true})['validKeyCode'](keyCode, '');
 }
 function validKeyCode(value, currentValue) {
 	var keyCode = value.charCodeAt(0);
-	return $.fn.formatNumberInput('returnMethods')['validKeyCode'](keyCode, currentValue);
+	return $.fn.formatNumberInput({'returnMethods':true})['validKeyCode'](keyCode, currentValue);
 }
 function validControlKeyCode(keyCode) {
-	return $.fn.formatNumberInput('returnMethods')['validKeyCode'](keyCode, '');
+	return $.fn.formatNumberInput({'returnMethods':true})['validKeyCode'](keyCode, '');
 }
 
 describe('jquery.formatNumberInput', function() {
@@ -56,7 +56,7 @@ describe('jquery.formatNumberInput', function() {
 		
 		describe('formatWithCommas', function() {
 			function formatWithCommas(number) {
-				return $.fn.formatNumberInput('returnMethods')['formatWithCommas'](number);
+				return $.fn.formatNumberInput({'returnMethods':true})['formatWithCommas'](number);
 			}
 
 			it('when less than 3 digits, it returns original value', function() {
