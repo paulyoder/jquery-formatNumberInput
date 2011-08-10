@@ -1,5 +1,5 @@
 (function($) {
-	var validKeys = [48,49,50,51,52,53,54,55,56,57]
+	var validKeys = [45,48,49,50,51,52,53,54,55,56,57]
 	var negativeKey = 45;
 	var allowNegative;
 	var maxLength;
@@ -7,10 +7,12 @@
 	var methods = {
 		validKeyCode: function(keyCode, currentValue) {
 			if (maxLength > 0 && currentValue.replace(/[^0-9]/g,'').length >= maxLength) { return false; }
-			if (keyCode == negativeKey && allowNegative) { return currentValue == ''; }
-			return (validKeys.indexOf(keyCode) >= 0);
+			if (keyCode == negativeKey && !allowNegative) { return false; }
+			else { return (validKeys.indexOf(keyCode) >= 0); }
 		},
 		formatWithCommas: function(number) {
+			number = number.replace(/(\d)-/g,'$1').replace(/--/g,'-');
+			if (!allowNegative) { number = number.replace(/-/g,''); }
 			return number.replace(/[^-0-9]/g, '')
 									 .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 		}

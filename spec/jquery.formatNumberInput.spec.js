@@ -40,8 +40,8 @@ describe('jquery.formatNumberInput', function() {
 					expect(validControlKeyCode(9)).toBeFalsy('end');
 					expect(validControlKeyCode(46)).toBeFalsy('begin');
 				});
-				it('"-" with non blank currentValue', function() {
-					expect(validKeyCode('-', '12')).toBeFalsy();
+				it('"-" when allowNegative is false', function() {
+					expect(validKeyCode('-', '', {'allowNegative': false})).toBeFalsy();
 				});
 			});
 			describe('entering valid characters', function() {
@@ -57,8 +57,8 @@ describe('jquery.formatNumberInput', function() {
 					expect(validKeyCode('8')).toBeTruthy('8');
 					expect(validKeyCode('9')).toBeTruthy('9');
 				});
-				it('"-" with blank currentValue', function() {
-					expect(validKeyCode('-', '')).toBeTruthy();
+				it('"-" when allowNegative is true', function() {
+					expect(validKeyCode('-', '929')).toBeTruthy();
 				});
 			});
 		});
@@ -81,6 +81,15 @@ describe('jquery.formatNumberInput', function() {
 			});
 			it('when negative 3 digit number, it returns original value', function() {
 				expect(formatWithCommas('-123')).toEqual('-123');
+			});
+			it('when negative 4 digit number with extra negative sign in middle, it deletes extra negative sign', function() {
+				expect(formatWithCommas('-123')).toEqual('-123');
+			});
+			it('when negative sign in middle, it deletes negative sign', function() {
+				expect(formatWithCommas('12-3')).toEqual('123');
+			});
+			it('when 2 negative signs at beginning, it deletes second sign', function() {
+				expect(formatWithCommas('--123')).toEqual('-123');
 			});
 			it('when negative 7 digit number, it adds 2 commans', function() {
 				expect(formatWithCommas('-1234567')).toEqual('-1,234,567');
