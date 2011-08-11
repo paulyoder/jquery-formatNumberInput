@@ -11,52 +11,52 @@
   <script type="text/javascript" src="lib/jasmine-jquery-1.1.2.js"></script>
   <script type="text/javascript" src="lib/jquery.simulate.js"></script>
 
-	<script type="text/javascript" src="src/jquery.formatNumberInput.js"></script>
+  <script type="text/javascript" src="src/jquery.formatNumberInput.js"></script>
   <script type="text/javascript" src="spec/jquery.formatNumberInput.spec.js"></script>
 
-	<style>
-		h2 {
-			margin-bottom: 0px;
-		}
+  <style>
+    h2 {
+      margin-bottom: 0px;
+    }
 
-		#sample {
-			width: 150px;
-		}
+    #sample {
+      width: 150px;
+    }
 
-		.key {
-			border: 1px solid black;
-		}
-	</style>
+    .key {
+      border: 1px solid black;
+    }
+  </style>
 
-	<script type="text/javascript">
-		$(function() { 
-				$('#sample').formatNumberInput({'maxLength': 9});
-			$('#sample').keypress(function(e) {
-				$('#keypress-which').html(e.which);
-			});
-			$('#sample').keydown(function(e) {
-				$('#keydown-which').html(e.which);
-			});
-		});
-	</script>
+  <script type="text/javascript">
+    $(function() { 
+        $('#sample').formatNumberInput({'maxLength': 9});
+      $('#sample').keypress(function(e) {
+        $('#keypress-which').html(e.which);
+      });
+      $('#sample').keydown(function(e) {
+        $('#keydown-which').html(e.which);
+      });
+    });
+  </script>
 </head>
 <body>
-	<script type="text/javascript">
-		jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
-		jasmine.getEnv().execute();
-	</script>
+  <script type="text/javascript">
+    jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+    jasmine.getEnv().execute();
+  </script>
 
-	<h2>Sample</h2>
-	<input id="sample" type="text" />
+  <h2>Sample</h2>
+  <input id="sample" type="text" />
 
-	<div>
-		<span>Keypress:</span>
-		<span id="keypress-which" />
-	</div>
-	<div>
-		<span>Keydown:</span>
-		<span id="keydown-which" />
-	</div>
+  <div>
+    <span>Keypress:</span>
+    <span id="keypress-which" />
+  </div>
+  <div>
+    <span>Keydown:</span>
+    <span id="keydown-which" />
+  </div>
 
 </body>
 </html>
