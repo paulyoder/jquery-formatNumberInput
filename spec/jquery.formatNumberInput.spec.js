@@ -18,7 +18,13 @@ function validControlKeyCode(keyCode) {
 }
 
 function formatWithCommas(number) {
-	return $.fn.formatNumberInput({'returnMethods':true})['formatWithCommas'](number);
+	return formatWithCommas(number, {});
+}
+
+function formatWithCommas(number, options) {
+	var defaultOptions = { 'returnMethods': true };
+	$.extend(defaultOptions, options);
+	return $.fn.formatNumberInput(defaultOptions)['formatWithCommas'](number);
 }
 
 describe('jquery.formatNumberInput', function() {
@@ -86,7 +92,10 @@ describe('jquery.formatNumberInput', function() {
 				expect(formatWithCommas('-123')).toEqual('-123');
 			});
 			it('when negative sign in middle, it deletes negative sign', function() {
-				expect(formatWithCommas('12-3')).toEqual('123');
+				expect(formatWithCommas('12--3')).toEqual('123');
+			});
+			it('when negative sign in middle and before a letter, it deletes negative sign', function() {
+				expect(formatWithCommas('12a--3')).toEqual('123');
 			});
 			it('when 2 negative signs at beginning, it deletes second sign', function() {
 				expect(formatWithCommas('--123')).toEqual('-123');
@@ -96,6 +105,12 @@ describe('jquery.formatNumberInput', function() {
 			});
 			it('when letters in value, it removes the letters', function() {
 				expect(formatWithCommas('2ko392')).toEqual('2,392');
+			});
+			it('when maxLength = 8 and more than 8 digits, it truncates down to the last 8 digits', function() {
+				expect(formatWithCommas('-1234568901234', {'maxLength': 8})).toEqual('-68,901,234');
+			});
+			it('when allowNegative = false, then it deletes negative', function() {
+				expect(formatWithCommas('-123', {'allowNegative': false})).toEqual('123');
 			});
 		});
 	});

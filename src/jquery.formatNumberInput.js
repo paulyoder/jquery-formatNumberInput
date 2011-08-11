@@ -11,10 +11,19 @@
 			else { return (validKeys.indexOf(keyCode) >= 0); }
 		},
 		formatWithCommas: function(number) {
-			number = number.replace(/(\d)-/g,'$1').replace(/--/g,'-');
+			//scrub number
+			number = number.replace(/[^-0-9]/g,'') 	//delete non negative and non numbers
+										 .replace(/--/g,'-') 			//delete double negatives
+										 .replace(/(\d)-/g,'$1'); //delete negatives in middle of number
+										 
+			if (maxLength > 0) { 
+				//make sure there are not more numbers than the maxLength
+				var regEx = new RegExp("\\d+(\\d{" + maxLength + "}$)", 'g');
+				number = number.replace(regEx,'$1'); 
+			}
 			if (!allowNegative) { number = number.replace(/-/g,''); }
-			return number.replace(/[^-0-9]/g, '')
-									 .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+			//add commas before returning
+			return number.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'); 
 		}
 	};	
 
@@ -29,7 +38,7 @@
 		if (settings['returnMethods'] == true) { return methods; }
 		
 		return this.keypress(function(e) {
-			//have to reset allowNegative variable since it went out of scope
+			//have to reset variables since they went out of scope
 			allowNegative = settings['allowNegative'];
 			maxLength = settings['maxLength'];
 			var currentValue = $(this).val();
