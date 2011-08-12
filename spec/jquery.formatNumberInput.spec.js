@@ -112,6 +112,12 @@ describe('jquery.formatNumberInput', function() {
       it('when allowNegative = false, then it deletes negative', function() {
         expect(formatWithCommas('-123', {'allowNegative': false})).toEqual('123');
       });
+      it('removes leading 0s', function() {
+        expect(formatWithCommas('001234')).toEqual('1,234');
+      });
+      it('removes leading 0s on negative number', function() {
+        expect(formatWithCommas('-001234')).toEqual('-1,234');
+      });
     });
   });
 

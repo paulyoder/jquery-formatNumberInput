@@ -12,10 +12,11 @@
     },
     formatWithCommas: function(number) {
       //scrub number
-      number = number.replace(/[^-0-9]/g,'')   //delete non negative and non numbers
-                     .replace(/--/g,'-')       //delete double negatives
-                     .replace(/(\d)-/g,'$1'); //delete negatives in middle of number
-                     
+      number = number.replace(/[^-0-9]/g,'')    //delete non negative and non numbers
+                     .replace(/--/g,'-')        //delete double negatives
+                     .replace(/(\d)-/g,'$1')    //delete negatives in middle of number
+                     .replace(/^(-?)0+/g,'$1'); //delete leading zeros 
+
       if (maxLength > 0) { 
         //make sure there are not more numbers than the maxLength
         var regEx = new RegExp("\\d+(\\d{" + maxLength + "}$)", 'g');
