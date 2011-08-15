@@ -100,6 +100,9 @@ describe('jquery.formatNumberInput', function() {
       it('when 2 negative signs at beginning, it deletes second sign', function() {
         expect(formatWithCommas('--123')).toEqual('-123');
       });
+      it('when many negative signs at the end, it deletes all of them', function() {
+        expect(formatWithCommas('123------------')).toEqual('123');
+      });
       it('when negative 7 digit number, it adds 2 commans', function() {
         expect(formatWithCommas('-1234567')).toEqual('-1,234,567');
       });
