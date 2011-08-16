@@ -50,6 +50,9 @@
       var origNumber = $(this).val();
       var newNumber = methods['formatWithCommas'](origNumber);
       if (newNumber != origNumber) { $(this).val(newNumber); }
+    }).blur(function() {
+      var number = methods['formatWithCommas']($(this).val());
+      if (number == '-') { $(this).val(''); }
     });
   }
 })(jQuery);

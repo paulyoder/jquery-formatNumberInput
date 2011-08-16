@@ -31,6 +31,10 @@ describe('jquery.formatNumberInput', function() {
   it('formatNumberInput plugin should exist', function() {
     expect(jQuery().formatNumberInput).toBeTruthy();
   });
+  it('when on blur and val is "-", then it deletes the "-"', function() {
+    $('#sample').val('-').blur();
+    expect($('#sample').val()).toEqual('');
+  });
 
   describe('internal methods', function() {
     describe('validKeyCode', function() {
