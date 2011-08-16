@@ -8,7 +8,7 @@
     validKeyCode: function(keyCode, currentValue) {
       if (maxLength > 0 && currentValue.replace(/[^0-9]/g,'').length >= maxLength) { return false; }
       if (keyCode == negativeKey && !allowNegative) { return false; }
-      else { return (validKeys.indexOf(keyCode) >= 0); }
+      else { return (jQuery.inArray(keyCode, validKeys) >= 0); }
     },
     formatWithCommas: function(number) {
       //scrub number
