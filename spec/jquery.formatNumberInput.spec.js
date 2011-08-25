@@ -107,6 +107,10 @@ describe('jquery.formatNumberInput', function() {
       });
       it('removes leading 0s', function() {
         expect(formatWithCommas('001234')).toEqual('1,234');
+        expect(formatWithCommas('-001234')).toEqual('-1,234');
+      });
+      it('allows a single 0', function() {
+        expect(formatWithCommas('0')).toEqual('0');
       });
       it('removes leading 0s on negative number', function() {
         expect(formatWithCommas('-001234')).toEqual('-1,234');
