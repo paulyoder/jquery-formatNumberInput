@@ -30,7 +30,7 @@
 
   <script type="text/javascript">
     $(function() { 
-        $('#sample').formatNumberInput({'maxLength': 9});
+      $('#sample').formatNumberInput({'maxLength': 3, 'decimalPlaces': 2});
       $('#sample').keypress(function(e) {
         $('#keypress-which').html(e.which);
       });
