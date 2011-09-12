@@ -158,6 +158,11 @@ describe('jquery.formatNumberInput', function() {
       it('is defaulted to 0', function() {
         expect(formatWithCommas('123.45')).toEqual('123');
       });
+      describe('when 0', function() {
+        it('deletes trailing periods', function() {
+          expect(formatWithCommas('123.',{'decimalPlaces': 0})).toEqual('123');
+        });
+      });
     });
   });
 });

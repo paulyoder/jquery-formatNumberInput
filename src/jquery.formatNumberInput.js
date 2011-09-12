@@ -21,7 +21,7 @@
 
       if (!allowNegative) { number = number.replace(/-/g,''); }
 
-      if (decimalPlaces == 0) { number = number.replace(/\.\d+$/g,''); }
+      if (decimalPlaces == 0) { number = number.replace(/\.\d*/g,''); }
       else { 
         var regEx = new RegExp("(\\.\\d{" + decimalPlaces + "})\\d+$", 'g');
         number = number.replace(regEx,'$1');
